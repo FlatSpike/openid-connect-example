@@ -1,0 +1,9 @@
+html
+  head
+    title= "Notes"
+  body
+    p= account.name
+    p= account.description
+    br
+    form(action="/oidc/logout", method="post")
+      button(type="submit") Logout

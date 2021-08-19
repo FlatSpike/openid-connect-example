@@ -1,0 +1,11 @@
+html
+  head
+    title= "Notes"
+  body
+    p= account.name
+    br
+    each note in notes 
+      p= note.createdAt + ' : ' + note.text
+    br
+    form(action="/oidc/logout", method="post")
+      button(type="submit") Logout
