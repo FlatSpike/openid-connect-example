@@ -7,16 +7,25 @@ import path from 'path'
 import { Oidc } from '../oidc'
 import routes from './routes'
 
-import { AccountRepository, NoteRepository } from '../repository'
+import { 
+  AccountRepository, 
+  NoteRepository,
+  SessionRepository
+} from '../repository'
 
 declare global {
   namespace Express {
     interface Request {
       accounts: AccountRepository,
-      notes: NoteRepository
+      notes: NoteRepository,
+      sessions: SessionRepository
     }
   }
 }
+
+const accountRepository = new AccountRepository()
+const notesRepository = new NoteRepository()
+const sessionRepository = new SessionRepository()
 
 export default async (): Promise<Express> => {
   const oidc = new Oidc()
@@ -24,6 +33,9 @@ export default async (): Promise<Express> => {
   console.log(`Successfully dicevered issuer: ${isserMetadata.issuer}`)
   
   const app = express()
+
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 
   app.use(morgan('tiny'))
 
@@ -33,6 +45,7 @@ export default async (): Promise<Express> => {
   app.use((req, res, next) => {
     req.accounts = new AccountRepository()
     req.notes = new NoteRepository()
+    req.sessions = new SessionRepository()
     return next()
   })
 

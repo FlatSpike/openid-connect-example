@@ -1,16 +1,11 @@
 import { Router } from 'express'
+import { Account } from 'repository'
 
 const router = Router()
 
 router.get('/', async (req, res, next) => {
-  const session = req.session.local
-  const accoutnId = session.accountId as string
-
-  const account = await req.accounts.findById(accoutnId)
-  if (!account) return res.end(`No account by id=${accoutnId}`)
-
-  const notes = await req.notes.getByAccountId(accoutnId)
-
+  const account = req.auth?.account as Account
+  const notes = await req.notes.getByAccountId(account?.id)
   res.render('notes', { notes: notes, account: account })
 })
 

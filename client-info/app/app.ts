@@ -7,15 +7,19 @@ import path from 'path'
 import { Oidc } from '../oidc'
 import routes from './routes'
 
-import { AccountRepository } from '../repository'
+import { AccountRepository, SessionRepository } from '../repository'
 
 declare global {
   namespace Express {
     interface Request {
       accounts: AccountRepository
+      sessions: SessionRepository
     }
   }
 }
+
+const accountRepository = new AccountRepository()
+const sessionRepository = new SessionRepository()
 
 export default async (): Promise<Express> => {
   const oidc = new Oidc()
@@ -24,13 +28,17 @@ export default async (): Promise<Express> => {
   
   const app = express()
 
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
+
   app.use(morgan('tiny'))
 
   app.set('view engine', 'pug')
   app.set('views', path.resolve(__dirname, 'views'));
   
   app.use((req, res, next) => {
-    req.accounts = new AccountRepository()
+    req.accounts = accountRepository
+    req.sessions = sessionRepository
     return next()
   })
 

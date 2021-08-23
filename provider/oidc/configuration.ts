@@ -1,6 +1,7 @@
 import { Configuration } from 'oidc-provider'
 
 import clients from './clients'
+import jwks from './jwks'
 import { AccountRepository } from '../repository'
 
 export default {
@@ -43,6 +44,11 @@ export default {
   renderError: async (ctx, out, error) => {
     console.log(error)
     ctx.res.write(error.message)
-  }
+  },
 
+  cookies: {
+    keys: [ 'cookie secret' ]
+  },
+
+  jwks: jwks
 } as Configuration;
