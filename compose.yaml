@@ -1,0 +1,26 @@
+services:
+  sso.info.ru:
+    build:
+      context: ./client-info
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3002:3002
+    depends_on:
+      - sso.auth.ru
+  sso.notes.ru:
+    build:
+      context: ./client-notes
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3001:3001
+    depends_on:
+      - sso.auth.ru
+  sso.auth.ru:
+    build:
+      context: ./provider
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000

@@ -34,7 +34,7 @@ class Account {
   login: string
   private password: string
 
-  testPasword(password: string) {
+  testPassword(password: string) {
     return this.password === password
   }
 

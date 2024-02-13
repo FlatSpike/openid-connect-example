@@ -24,7 +24,7 @@ const sessionRepository = new SessionRepository()
 export default async (): Promise<Express> => {
   const oidc = new Oidc()
   const isserMetadata = await oidc.discover()
-  console.log(`Successfully dicevered issuer: ${isserMetadata.issuer}`)
+  console.log(`Successfully discovered issuer: ${isserMetadata.issuer}`)
   
   const app = express()
 

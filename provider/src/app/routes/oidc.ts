@@ -2,10 +2,10 @@ import { Router } from 'express'
 import { AccountRepository } from '../../repository';
 
 // this is replica of grant type in openid library
-// unfortunatly its not exported from library,
+// unfortunately its not exported from library,
 // and because i am not familiar with typescript,
-// i dont know how to use it in code in right way,
-// so i create this type declaretion for convinence
+// i don`t know how to use it in code in right way,
+// so i create this type declaration for convenience
 declare class Grant {
     constructor(properties?: {
        clientId?: string | undefined
@@ -66,9 +66,9 @@ router.get('/interaction/:uid', async (req, res, next) => {
     const client_id = params['client_id'] as string
     const client = await oidc.Client.find(client_id)
 
-    // by defailt interaction consists of two parts
+    // by default interaction consists of two parts
     // 'login' - page where user input his credentials
-    // 'consert' - page where user confirm to give requested 
+    // 'consent' - page where user confirm to give requested 
     //    scopes and climes to client
     if (prompt.name === 'login') {
         return res.render('login', {
@@ -109,7 +109,7 @@ router.post('/interaction/:uid/login', async (req, res, next) => {
     const password = req.body.password
 
     const account = await AccountRepository.findByLogin(login)
-    if (!account || !account.testPasword(password)) {
+    if (!account || !account.testPassword(password)) {
       return res.render('login', {
         client,
         uid,
