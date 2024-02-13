@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { generators } from 'openid-client'
 import { default as jwt, JwtPayload } from 'jsonwebtoken'
 
-import { Session } from '../../repository'
+import { Session } from '../../repository/index.js'
 
 const router = Router()
 

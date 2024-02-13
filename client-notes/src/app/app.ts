@@ -4,14 +4,14 @@ import session from 'express-session'
 import morgan from 'morgan'
 import path from 'path'
 
-import { Oidc } from '../oidc'
-import routes from './routes'
+import { Oidc } from '../oidc/index.js'
+import routes from './routes/index.js'
 
 import { 
   AccountRepository, 
   NoteRepository,
   SessionRepository
-} from '../repository'
+} from '../repository/index.js'
 
 declare global {
   namespace Express {
@@ -40,7 +40,7 @@ export default async (): Promise<Express> => {
   app.use(morgan('tiny'))
 
   app.set('view engine', 'pug')
-  app.set('views', path.resolve(__dirname, 'views'));
+  app.set('views', path.resolve(import.meta.dirname, 'views'));
   
   app.use((req, res, next) => {
     req.accounts = new AccountRepository()

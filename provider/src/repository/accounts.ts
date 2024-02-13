@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 // there no restrictions for it
 class Account {
   // https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
-  // this is standart openid climes
+  // this is standard openid climes
   // only sub clime is required (its accountId in terms of openid spec)
   // all others are optional
   sub: string

@@ -1,10 +1,10 @@
 import { Router, Request, Response, NextFunction } from 'express'
 
-import { Account } from '../../repository/accounts'
+import { Account } from '../../repository/accounts.js'
 
-import login from './login'
-import notes from './info'
-import oidc from './oidc'
+import login from './login.js'
+import notes from './info.js'
+import oidc from './oidc.js'
 
 const router = Router()
 

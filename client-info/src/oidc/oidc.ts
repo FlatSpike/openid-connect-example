@@ -1,6 +1,6 @@
 import { Issuer, Client, IssuerMetadata } from 'openid-client'
 
-import client from './client'
+import client from './client.js'
 
 const ISSUER = 'http://sso.auth.ru:3000/oidc'
 

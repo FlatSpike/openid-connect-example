@@ -1,10 +1,10 @@
 import path from 'path'
 import express from 'express'
-import { Provider } from 'oidc-provider'
+import Provider from 'oidc-provider'
 
-import { oidc } from '../oidc'
-import { AccountRepository } from '../repository'
-import { oidc as oicdRoutes } from './routes'
+import { oidc } from '../oidc/index.js'
+import { AccountRepository } from '../repository/index.js'
+import { oidc as oicdRoutes } from './routes/index.js'
 
 const app = express()
 
@@ -18,11 +18,11 @@ declare global {
 }
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 
 app.set('trust proxy', true);
 app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, 'views'));
+app.set('views', path.resolve(import.meta.dirname, 'views'));
 
 app.use((req, res, next) => {
   req.oidc = oidc

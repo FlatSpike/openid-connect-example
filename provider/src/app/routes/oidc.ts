@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { AccountRepository } from '../../repository';
+import { AccountRepository } from '../../repository/index.js';
 
 // this is replica of grant type in openid library
 // unfortunately its not exported from library,

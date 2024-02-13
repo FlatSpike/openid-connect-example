@@ -1,7 +1,7 @@
 import { ClientMetadata } from 'oidc-provider'
 
-import notes from './notes'
-import info from './info'
+import notes from './notes.js'
+import info from './info.js'
 
 export default [
   notes,

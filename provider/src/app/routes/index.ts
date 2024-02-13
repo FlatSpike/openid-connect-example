@@ -1,1 +1,1 @@
-export { default as oidc } from './oidc'
+export { default as oidc } from './oidc.js'

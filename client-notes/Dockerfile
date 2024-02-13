@@ -1,10 +1,10 @@
-FROM node:14-alpine
+FROM node:20-alpine
 USER node
-WORKDIR /usr/src/app
-COPY package*.json ./
+WORKDIR /home/node
+COPY --chown=node:node package*.json ./
+COPY --chown=node:node tsconfig*.json ./
+COPY --chown=node:node ./src ./src
 RUN npm install
-COPY tsconfig*.json ./
-COPY ./src ./src
 RUN npm run build
 EXPOSE 3001
 CMD node dist

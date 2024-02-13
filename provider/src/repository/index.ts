@@ -1,1 +1,1 @@
-export { default as AccountRepository } from './accounts'
+export { default as AccountRepository } from './accounts.js'

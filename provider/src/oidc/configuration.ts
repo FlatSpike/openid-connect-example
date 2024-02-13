@@ -1,8 +1,8 @@
 import { Configuration } from 'oidc-provider'
 
-import clients from './clients'
-import jwks from './jwks'
-import { AccountRepository } from '../repository'
+import clients from './clients/index.js'
+import jwks from './jwks.js'
+import { AccountRepository } from '../repository/index.js'
 
 export default {
   clients: clients,
@@ -22,7 +22,6 @@ export default {
     devInteractions: { enabled: false },
 
     backchannelLogout: {
-      ack: 'draft-06',
       enabled: true
     }
   },

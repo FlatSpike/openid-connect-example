@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { Account } from '../../repository'
+import { Account } from '../../repository/accounts.js'
 
 const router = Router()
 
