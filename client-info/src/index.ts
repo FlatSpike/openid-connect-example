@@ -5,7 +5,7 @@ const port = 3002
 app()
   .then((app) => {
     app.listen(port, () => {
-      console.log(`Oidc client "info" listening at http://sso.info.ru:${port}`)
+      console.log(`Oidc client "info" listening at ${port}`)
     })
   })
   .catch((err) => {

@@ -14,7 +14,7 @@ declare module 'express-session' {
 }
 
 router.get('/auth', async (req, res) => {
-  const client = req.oidc.client
+  const client = await req.oidc.discover()
 
   const code_verifier = generators.codeVerifier()
   const code_challenge = generators.codeChallenge(code_verifier)
@@ -31,14 +31,14 @@ router.get('/auth', async (req, res) => {
 })
 
 router.get('/cb', async (req, res) => {
-  const client = req.oidc.client
+  const client = await req.oidc.discover()
 
   const code_verifier = req.session.code_verifier
   if (!code_verifier) return res.end('No oidc session')
 
   const params = client.callbackParams(req)
   const tokenSet = await client.callback(
-    'http://sso.info.ru:3002/oidc/cb', 
+    'http://sso.info.ru/oidc/cb', 
     params, 
     { code_verifier }
   )
@@ -63,7 +63,7 @@ router.get('/cb', async (req, res) => {
 })
 
 router.post('/logout', async (req, res) => {
-  const client = req.oidc.client
+  const client = await req.oidc.discover()
 
   const sid = req.session.sid
   if (!sid) return res.redirect('/')

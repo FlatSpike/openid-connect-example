@@ -28,10 +28,6 @@ const notesRepository = new NoteRepository()
 const sessionRepository = new SessionRepository()
 
 export default async (): Promise<Express> => {
-  const oidc = new Oidc()
-  const isserMetadata = await oidc.discover()
-  console.log(`Successfully dicevered issuer: ${isserMetadata.issuer}`)
-  
   const app = express()
 
   app.use(express.json())
@@ -58,7 +54,7 @@ export default async (): Promise<Express> => {
 
   app.use(session({ secret: 'some secret' }))
 
-  app.use(oidc.middleware())
+  app.use(new Oidc().middleware())
 
   app.use('/', routes)
 
